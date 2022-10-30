@@ -1,0 +1,61 @@
+[tool.poetry]
+name = "sinope"
+description = "Jupyter Kernel for a Simple Programming Language."
+version = "0.1.0"
+authors = ["tom65536"]
+license = "EUPL-1.2"
+readme = "README.md"
+classifiers = [
+    "Framework :: IPython",
+    "Framework :: Jupyter",
+    "License :: OSI Approved :: European Union Public Licence 1.2 (EUPL 1.2)",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Topic :: Education",
+    "Typing :: Typed",
+    "Development Status :: 1 - Planning",
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pyparsing = "^3.0.9"
+metakernel = "^0.29.2"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.1.3"
+pytest-cov = "^4.0.0"
+pylama = {extras = ["all"], version = "^8.4.1"}
+pytest-html = "^3.1.1"
+pylint-quotes = "^0.2.3"
+
+
+[tool.poetry.group.doc.dependencies]
+pdoc = "^12.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts = "--cov=sinope --cov-report=html:target/coverage --cov-report=term --pylama --html=target/pytest.html"
+testpaths = [
+	"tests",
+	"src"
+]
+
+[tool.pylama]
+linters = "eradicate,mccabe,mypy,pycodestyle,pydocstyle,pyflakes,pylint"
+format = "parsable"
+skip = "*/.tox/*,*/.env/*"
+pydocstyle-convention = "numpy"
+max_line_length=100
+
+
+[tool.pylama.linter.pydocstyle]
+ignore = "D203,D212"
+
+[tool.pylama.linter.pycodestyle]
+ignore = "E203,W503"
